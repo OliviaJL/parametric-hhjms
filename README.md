@@ -14,4 +14,5 @@ install new versions:
 
 Download the *src* foler, and run *exp.R*.
 
-### Fi
+- For the first time, run lines 12-13 in *exp.R* to create an experiment.
+- Otherwise, run line 15 to load an existing experiment.
