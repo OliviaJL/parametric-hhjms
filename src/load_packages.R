@@ -13,7 +13,7 @@
 library(lme4)
 library(survival)
 library(Rlab) # rbern
-library(eha) # rllogis
+#library(eha) # rllogis
 library(data.table)
 library(tidyverse)
 library(batchtools)
