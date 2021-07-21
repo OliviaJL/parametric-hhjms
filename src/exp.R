@@ -13,7 +13,7 @@ source("load_packages.R")
 #HHJMs_tmp$cluster.functions = makeClusterFunctionsMulticore(ncpus = ncpus)
 #getDefaultRegistry()
 loadRegistry(file.dir="HHJMs_simul0720", writeable = TRUE)
-removeExperiments(ids=c(11:15,21:25))
+removeExperiments(ids=1:25)
 
 ## design the problems and algorithms ----------------------------------------------------
 source('generate_data.R')
@@ -22,7 +22,7 @@ source('design_model.R')
 addAlgorithm(name = "fit_JMest", fun = JM_estimator) # fit the JM models
 
 ## add the experiment --------------------------------------------------------------
-addExperiments(problem_designs, algo_designs, repls = 2L, combine = 'crossprod') # of replicates = 500
+addExperiments(problem_designs, algo_designs, repls = 10L, combine = 'crossprod') # of replicates = 500
 #getJobPas(reg = HHJMs_tmp)
 summarizeExperiments()
 #summarizeExperiments(reg = HHJMs_tmp, by = c('problem', 'algorithm'))
