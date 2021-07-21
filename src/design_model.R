@@ -115,7 +115,7 @@ pre_estimator <- function(data, job, instance, distribution, ...){
       disp = NULL,
       lower = NULL, upper = NULL,
       distribution = 'loglogistic',
-      str_val = -summary(survFit)$coeff[-1] / summary(survFit)$scale
+      str_val = summary(survFit)$coeff[-1]
     )
   }
   
