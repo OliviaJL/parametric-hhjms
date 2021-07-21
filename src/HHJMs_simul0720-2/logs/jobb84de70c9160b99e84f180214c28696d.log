@@ -1,0 +1,72 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/data/home/mengwang/21-summer-project/src'
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=105]
+### [bt]: Generating problem instance for problem 'generate_data' ...
+### [bt]: Applying algorithm 'fit_JMest' on problem 'generate_data' for job 105 (seed = 20071048) ...
+[1] "get initial values for LME & GLM models --- done."
+[1] "get initial values for GLME model --- done."
+[1] "get initial values for survival models --- done."
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+Warning in log(det(H/2/pi)) : NaNs produced
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 1 ############### 
+fixed.par: 1.77 1.19 -0.39 1.64 0.06 -1.66 0.29 -2.73 -1.16 2.73 1.13 -0.04 2.58 -0.18 -0.23 1.15 
+FixedParDiff =  4.522391 
+likDiff =  1 
+sigma: 1.16 0 -0.52 -0.62 1.52 
+loglike: -8539.634 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 2 ############### 
+fixed.par: 1.77 1.19 -0.39 1.64 0.05 -1.7 0.29 -2.79 -1.15 2.52 1.33 -0.06 2.6 -0.45 -0.48 1.15 
+FixedParDiff =  0.2125623 
+likDiff =  0.2979428 
+sigma: 1.16 0.01 -0.49 -0.63 1.52 
+loglike: -5995.312 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+Warning in log(det(H/2/pi)) : NaNs produced
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 3 ############### 
+fixed.par: 1.77 1.2 -0.39 1.64 0.05 -1.72 0.32 -2.77 -1.14 2.53 1.4 -0.06 2.69 -1.77 -1.91 1.15 
+FixedParDiff =  0.3893722 
+likDiff =  0.007584182 
+sigma: 1.16 0.01 -0.41 -0.74 1.51 
+loglike: -5949.842 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+Warning in log(det(H/2/pi)) : NaNs produced
+Warning in log(det(H/2/pi)) : NaNs produced
+Warning in log(det(H/2/pi)) : NaNs produced
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 4 ############### 
+fixed.par: 1.8 1.18 -0.39 1.63 0.06 -1.71 0.34 -2.75 -1.14 2.53 1.47 -0.05 3.55 -13.43 -13.93 1.15 
+FixedParDiff =  0.8468664 
+likDiff =  0.01878755 
+sigma: 1.15 0.01 -0.29 -0.81 1.51 
+loglike: -5838.059 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 5 ############### 
+fixed.par: 1.86 1.15 -0.37 1.58 0.07 -1.72 0.36 -2.73 -1.12 2.51 1.5 -0.05 8.11 -95.41 -95.86 1.12 
+FixedParDiff =  0.8643757 
+likDiff =  0.01681457 
+sigma: 1.12 0.01 -0.22 -0.83 1.51 
+loglike: -5739.895 
+########################################## 
+Warning in JMfit_HL(glmeObject, survObject, long.data, surv.data, idVar,  :
+  Iteration limit reached without covergence.
+Warning in sqrt(sd2) : NaNs produced
+Warning in sqrt(diag(solve(Hmat))) : NaNs produced
+
+### [bt]: Job terminated successfully [batchtools job.id=105]
+### [bt]: Calculation finished!
