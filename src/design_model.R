@@ -1,7 +1,7 @@
 algo_designs <- list( # both tf_versions, all other params the same
   fit_JMest = data.table(
-    distribution = c('No_distribution','weibull','loglogistic','weibull', 'loglogistic'), #, 'weibull', 'loglogistic'),
-    method = c('h-likelihood', 'h-likelihood', 'h-likelihood', 'aGH', 'aGH'),
+    distribution = 'loglogistic', #c('No_distribution','weibull','loglogistic','weibull', 'loglogistic'), #, 'weibull', 'loglogistic'),
+    method = c('h-likelihood','aGH'),#c('h-likelihood', 'h-likelihood', 'h-likelihood', 'aGH', 'aGH'),
     itertol = 1e-3,
     iterMax = 10L
   )
