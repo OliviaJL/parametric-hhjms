@@ -1,9 +1,9 @@
 algo_designs <- list( # both tf_versions, all other params the same
   fit_JMest = data.table(
-    distribution = 'loglogistic', #c('No_distribution','weibull','loglogistic','weibull', 'loglogistic'), #, 'weibull', 'loglogistic'),
-    method = c('h-likelihood','aGH'),#c('h-likelihood', 'h-likelihood', 'h-likelihood', 'aGH', 'aGH'),
+    distribution = c('No_distribution','weibull','loglogistic','weibull', 'loglogistic'),
+    method = c('h-likelihood', 'h-likelihood', 'h-likelihood', 'aGH', 'aGH'),
     itertol = 1e-3,
-    iterMax = 10L
+    iterMax = 6L
   )
 )
 
@@ -16,7 +16,7 @@ pre_estimator <- function(data, job, instance, distribution, ...){
   
   ## get initial values ------------------------
   ## LME models
-  ## Model 1: a LME model of Y 
+  ## Model 1: a LME model of Y
   fm1 = y ~ 1 + year + year2 + sindoes + (1|sid)
   md1 <- lmer(fm1, data = long_data)
   estBi = data.frame(row.names(ranef(md1)$sid), scale(ranef(md1)$sid, center = T, scale = T)) # get the estimated random effect by observation
@@ -50,14 +50,14 @@ pre_estimator <- function(data, job, instance, distribution, ...){
     fm = y ~ 1 + year + year2 + sindoes + b11,
     family = 'normal', par = "beta", ran.par = 'b11', sigma = 'sigma',
     disp = 'beta4',
-    lower = 0, upper = Inf,   
+    lower = 0, upper = Inf,
     str_val = c(fixef(md1), sd(ranef(md1)$sid[,1])),
     CenObject = CenObject)
 
   glmeObject2 <- list(
     fm = z ~ 1 + month + sindoes +doesW + b11 + month*b21,
     family = 'binomial', par = "alpha", ran.par = c('b11','b21'),
-    sigma = NULL, 
+    sigma = NULL,
     disp = c("alpha4", 'alpha5'),
     lower = c(-Inf,0),
     upper = rep(Inf,2),
@@ -71,7 +71,7 @@ pre_estimator <- function(data, job, instance, distribution, ...){
   datt <- instance$surv_data
   datt$estb11 <- scale(ranef(md1)$sid[,1], center = T, scale = T)
   datt$estb21 <- scale(ranef(md3)$sid[,1], center = T, scale = T)
-  # using the estimated random intercept from model 1 (i.e. estb11, scaled) 
+  # using the estimated random intercept from model 1 (i.e. estb11, scaled)
   # and the estimate random slope from model 3 (i.e. estb21, scaled) as covariates.
   Sdata <- datt
   
@@ -82,7 +82,7 @@ pre_estimator <- function(data, job, instance, distribution, ...){
     ## case 1: if a Cox PH model is fit for survival data
     survObject = list(
       fm = obs_time ~ base+b11+b21,
-      event = "event", 
+      event = "event",
       par = 'lambda',
       disp = NULL,
       lower = NULL, upper = NULL,
@@ -96,7 +96,7 @@ pre_estimator <- function(data, job, instance, distribution, ...){
     ## case 2: if a Weibull model is fit for survival data
     survObject = list(
       fm = obs_time ~ base+b11+b21,
-      event = "event", 
+      event = "event",
       par = 'lambda',
       disp = NULL,
       lower = NULL, upper = NULL,
@@ -110,12 +110,12 @@ pre_estimator <- function(data, job, instance, distribution, ...){
     ## case 3: a loglogistic AFT model for survival data
     survObject = list(
       fm = obs_time ~ base+b11+b21,
-      event = "event", 
+      event = "event",
       par = 'lambda',
       disp = NULL,
       lower = NULL, upper = NULL,
       distribution = 'loglogistic',
-      str_val = summary(survFit)$coeff[-1]
+      str_val = summary(survFit)$coeff[-1] 
     )
   }
   
@@ -142,8 +142,8 @@ JM_summary <- function(testjm, newSD = FALSE, digits = 3){
 }
 
 ## fit the HHJMs models -----------------------------------------------------------
-JM_estimator <- function(data, job, instance, method = c('h-likelihood', 'aGH'), 
-                         distribution = c('No_distribution', 'weibull', 'loglogistic'), ...){
+JM_estimator <- function(data, job, instance, method = c('h-likelihood', 'aGH'),
+                         distribution = c('No_distribution', 'weibull', 'loglogistic'), iterMax = 10L, ...){
   
   method = match.arg(method)
   distribution = match.arg(distribution)
@@ -157,20 +157,20 @@ JM_estimator <- function(data, job, instance, method = c('h-likelihood', 'aGH'),
   survFit = pre_est$survFit
   
   if (method == 'h-likelihood'){
-      testjm <- JMfit(glmeObject, survObject, long_data, surv_data, idVar ="sid", eventTime = "obs_time", 
-                      survFit, method=method)
+      testjm <- JMfit(glmeObject, survObject, long_data, surv_data, idVar ="sid", eventTime = "obs_time",
+                      survFit, method=method, iterMax = iterMax)
       ## re-estimate SDs of parameter estimates by using the adaptive GH method
       new_sd = HHJMs:::JMsd_aGH(testjm, ghsize = 4, parallel = F)
       testjm$new_sd = new_sd
       sum_jm = JM_summary(testjm, newSD = TRUE)
       
-  } else if (method == 'aGH') { 
+  } else if (method == 'aGH') {
       ## case 3: joint modeling using adaptive GH method
-      ## the survival data must be modeled by a Weibull model 
-      testjm <- JMfit(glmeObject, survObject, long_data, surv_data, idVar = "sid", eventTime = "obs_time", 
-                      survFit, method=method, ghsize = 3, parallel = F, ...)
+      ## the survival data must be modeled by a Weibull model
+      testjm <- JMfit(glmeObject, survObject, long_data, surv_data, idVar = "sid", eventTime = "obs_time",
+                      survFit, method=method, ghsize = 3, parallel = F, iterMax=iterMax)
       sum_jm = JM_summary(testjm)
-    } 
+    }
   
   return(list(testjm = testjm, sum_jm = sum_jm))
   

@@ -9,10 +9,10 @@ setwd(srcpath)
 source("load_packages.R")
 
 ## create the experiment --------------------------------------------
-HHJMs_tmp = makeExperimentRegistry("HHJMs_simul0720-2", packages = "HHJMs", seed = 20070943)
-HHJMs_tmp$cluster.functions = makeClusterFunctionsMulticore(ncpus = ncpus)
+#HHJMs_tmp = makeExperimentRegistry("HHJMs_simul0720-2", packages = "HHJMs", seed = 20070943)
+#HHJMs_tmp$cluster.functions = makeClusterFunctionsMulticore(ncpus = ncpus)
 #getDefaultRegistry()
-#loadRegistry(file.dir="HHJMs_simul0720-2", writeable = TRUE)
+loadRegistry(file.dir="HHJMs_simul0720-2", writeable = TRUE)
 
 ## design the problems and algorithms ----------------------------------------------------
 source('generate_data.R')
@@ -20,16 +20,18 @@ addProblem(name = "generate_data", data = NULL, fun = data_generator) # generate
 source('design_model.R')
 addAlgorithm(name = "fit_JMest", fun = JM_estimator) # fit the JM models
 
-## add the experiment --------------------------------------------------------------
-addExperiments(problem_designs, algo_designs, repls = 3L, combine = 'crossprod') # of replicates = 500
-#getJobPas(reg = HHJMs_tmp)
-summarizeExperiments()
-#summarizeExperiments(reg = HHJMs_tmp, by = c('problem', 'algorithm'))
+for(i in 1:4){
+    ## add the experiment --------------------------------------------------------------
+    addExperiments(problem_designs, algo_designs, repls = 50L, combine = 'crossprod') # of replicates = 500
+    #getJobPas(reg = HHJMs_tmp)
+    summarizeExperiments()
+    #summarizeExperiments(reg = HHJMs_tmp, by = c('problem', 'algorithm'))
 
-## submit the experiment -------
-getStatus()
-submitJobs()
-getStatus()
+    ## submit the experiment -------
+    getStatus()
+    submitJobs()
+    getStatus()
+}
 
 ## remove experiments
 #removeAlgorithms(name='fit_JMest')
@@ -38,9 +40,9 @@ getStatus()
 
 
 ## find errors ----------------
-getErrorMessages()
+#getErrorMessages()
 findErrors()$job.id
-getJobPars(ids = 1)$prob.pars
+#getJobPars(ids = 1)$prob.pars
 
 #addJobTags(findErrors()$job.id, 'fail')
 #addJobTags(getJobPars()$job.id[-findErrors()$job.id], 'success')

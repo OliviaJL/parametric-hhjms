@@ -1,20 +1,16 @@
 ## setting of data -------------
 problem_designs <- list(
   generate_data = data.table::CJ(
-    N0 = 100L, # of subjects # c(50L, 100L)
-    LLOQ = 2L, #c(2, 4),
-    #JJ = c(10L, 20L) # of measurements
-    disper = .3, #.3
-    true_dist = 'weibull'#c('weibull', 'loglogistic')
+    N0 = 100L, 
+    LLOQ = 2L,
+    disper = .3
   )
 )
 
 
 ## generate data -----------------------
-data_generator <- function(data = NULL, job, N0 = 100L, LLOQ = 2, disper = .5, 
-                           true_dist = c('weibull', 'loglogistic'), ...) {
+data_generator <- function(data = NULL, job, N0 = 100L, LLOQ = 2, disper = .5, ...) {
   
-  true_dist = match.arg(true_dist)
   
   long.data0 = c()
   surv.data0 = c()
@@ -66,12 +62,7 @@ data_generator <- function(data = NULL, job, N0 = 100L, LLOQ = 2, disper = .5,
   base = rep(X, each=J)
   
   ## create event time and observed time variables
-  if (true_dist == 'weibull')  {
-    event_time = rweibull(N0, 15, scale = h0 * (exp(gamma[1] * X + b %*% gamma[-1]))^(-1/15))
-  } else if (true_dist ==  'loglogistic') {
-    event_time = eha::rllogis(N0, 15, scale = h0 * (exp(gamma[1] * X + b %*% gamma[-1]))^(-1/15))
-  } 
-  
+  event_time = rweibull(N0, 15, scale = h0 * (exp(gamma[1] * X + b %*% gamma[-1]))^(-1/15))
   event = ifelse(event_time > t_max, 0, 1)
   cc_s = rweibull(N0, 5, 1000) # C
   obs_time = round(apply(cbind(event_time, cc_s), 1, min), 0)
@@ -96,7 +87,7 @@ data_generator <- function(data = NULL, job, N0 = 100L, LLOQ = 2, disper = .5,
   ## discrete, longitudinal response
   z = c()
   for(i in 1:N0){
-    xi_z = alpha[1] + alpha[2] * time[sid == i] + alpha[3] * sindoes[sid == i] + alpha[4] * doesW[sid == i] + alpha[5] * b[i, 1] + d2 * b[i, 2] * time[sid == i] 
+    xi_z = alpha[1] + alpha[2] * time[sid == i] + alpha[3] * sindoes[sid == i] + alpha[4] * doesW[sid == i] + alpha[5] * b[i, 1] + d2 * b[i, 2] * time[sid == i]
     p_z = exp(xi_z) / (1 + exp(xi_z))
     z_o = rbern(J, prob = p_z)
     z = c(z, z_o)
@@ -106,6 +97,6 @@ data_generator <- function(data = NULL, job, N0 = 100L, LLOQ = 2, disper = .5,
   long.data0 = long.data0[long.data0$time != -1,]
   
   ## return data sets ----------------------------------------------
-  return(list(long_data = long.data0, surv_data = surv.data0, LLOQ = LLOQ)) 
+  return(list(long_data = long.data0, surv_data = surv.data0, LLOQ = LLOQ))
 }
 
