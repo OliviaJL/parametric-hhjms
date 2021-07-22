@@ -1,8 +1,10 @@
-# Introduction to the project
+# An Extension of [HHJMs](https://github.com/oliviayu/HHJMs) to some parametric survival models
+
+## Introduction to the project
 
 This project extends the work on jointly modelling mixed and truncated longitudinal data and survival data by Tingting Yu, Dr. Lang Wu and Dr. Peter B. Gilbert [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) to a couple of alternative survival models, *Weibull Regression Model* and *Loglogistic Accelarated Failure Time Model*. The work is motivated by higher efficiency of the parametric survival models compared to nonparametric ones when the distributional assumptions hold. 
 
-## Motivation Case: The HIV Vaccine Data
+### Motivation Case: The HIV Vaccine Data
 
 The original study by Tingting et al [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) is motivated by the VAX004 trial. 
 ......
