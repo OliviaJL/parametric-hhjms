@@ -20,10 +20,9 @@ addProblem(name = "generate_data", data = NULL, fun = data_generator) # generate
 source('design_model.R')
 addAlgorithm(name = "fit_JMest", fun = JM_estimator) # fit the JM models
 
-nrepls = 50L
 for(i in 1:4){
     ## add the experiment --------------------------------------------------------------
-    addExperiments(problem_designs, algo_designs, repls = nrepls*i , combine = 'crossprod') # of replicates = 500
+    addExperiments(problem_designs, algo_designs, repls = 50L, combine = 'crossprod') # of replicates = 500
     #getJobPas(reg = HHJMs_tmp)
     summarizeExperiments()
     #summarizeExperiments(reg = HHJMs_tmp, by = c('problem', 'algorithm'))
