@@ -1,11 +1,11 @@
 ## set ahead of the experiments
 ## working directory
-srcpath = "~/src" # load functions
+# srcpath = "~/src" # load functions
 #srcpath1 = paste(srcpath, "/HHJMs-l/R", sep='') # load the R files
-ncpus = 8 # of CPUs used for parallel computing
+ncpus = 16 # of CPUs used for parallel computing
 
 ## load the R packages for the experiment
-setwd(srcpath)
+# setwd(srcpath)
 source("load_packages.R")
 source('generate_data.R')
 source('design_model.R')
@@ -14,7 +14,9 @@ source('design_model.R')
 #HHJMs_tmp = makeExperimentRegistry("HHJMs_simul0721", packages = "HHJMs", seed = 20070943)
 #HHJMs_tmp$cluster.functions = makeClusterFunctionsMulticore(ncpus = ncpus)
 #getDefaultRegistry()
-loadRegistry(file.dir="HHJMs_simul0721", writeable = TRUE)
+HHJMs_tmp=loadRegistry(file.dir="HHJMs_simul0721", writeable = TRUE)
+#HHJMs_tmp = makeExperimentRegistry("HHJMs_simul0721", packages = "HHJMs", seed = 20070943)
+HHJMs_tmp$cluster.functions = makeClusterFunctionsMulticore(ncpus = ncpus)
 
 ##add experiments
 removeExperiments(ids=1:9)
@@ -31,6 +33,7 @@ addExperiments(problem_designs, algo_designs, repls = 10L , combine = 'crossprod
 getStatus()
 submitJobs()
 getStatus()
+waitForJobs()
 
 
 
