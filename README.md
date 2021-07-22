@@ -38,19 +38,21 @@ install_github('oliviayu/HHJMs')`
 
 ### Modification on the Original Package
 
-The package is further modified in multiple ways to be more user-friendly; the modifications are listed in the issue-solution pairs below.
+The package is further modified in multiple ways to be more user-friendly; the modifications are listed below.
 
-- Issue 1: Some dependencies are not successully loaded when installing the HHJMs package.
-- Solution: Re-document the package by importing the dependencies in NAMESPACE.
+- Fix the issue that some dependencies are not successully loaded when installing the HHJMs package.
 
-- Issue 2: Users need to source the R file locally when using some functions in the package.
-- Solution: Same as for issue 1 with removing the code for sourcing the files.
+- Fix the issue that users need to source the R files locally when using some functions in the package.
 
-- Issue 3: Numeric issue when summarizing the fitted model.
-- Solution: Use `as.numeric` to transform vectors to be numerical, and assign nonpositive standard errors to be an arbitrarily small scalar.
+- Fix the numeric issue when summarizing the fitted model.
 
-- Issue 4: Some arguments called by defining a function cannot work.
-- Solution: Add ellipses as the last arguments of functions. 
+- Add ellipses into some functions to call arguments in the functions they call.
+
+- Add documentation.
+
+- Example code is modified by combining repeated code.
+
+
 
 
 ### Troubleshooting
