@@ -1,29 +1,44 @@
-# An Extension of [HHJMs](https://github.com/oliviayu/HHJMs) to some parametric survival models
+# Introduction on the Project - An Extension of [HHJMs](https://github.com/oliviayu/HHJMs) to some parametric survival models
 
-## Introduction to the project
+## Project Overview
 
 This project extends the work on jointly modelling mixed and truncated longitudinal data and survival data by Tingting Yu, Dr. Lang Wu and Dr. Peter B. Gilbert [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) to a couple of alternative survival models, *Weibull Regression Model* and *Loglogistic Accelarated Failure Time Model*. The project is motivated by higher efficiency of the parametric survival models compared to nonparametric ones when the distributional assumptions hold. 
 
-### Motivation Case: The HIV Vaccination
+### Motivation Case - The HIV Vaccine Data
 
 The original study by Tingting et al [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) is motivated by the VAX004 trial. 
 ......
 
 The special type of response variables... visualized as in Fig.1 below. (add a figure illustrating the longitudinal variables as Fig.1 in the [paper](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) )
 
-### Contributions of the extended work
+### Some Contributions
 
 This work extends the original work by replacing the nonparametric survival model, *Cox proportional hazards model*, by two parametric alternatives, *Weibull Regression Model* and *Loglogistic Accelarated Failure Time Model*, which are more efficient when the distributional assumptions hold.
 
 
-## Introduction to the Documents in the Repo
+## Documents in the Github Repository
+
+...
 
 
+## The Modified Package - [HHJMs.c](HHJMs-l.tar.gz)
 
+The orignal package [HHJMs](https://github.com/oliviayu/HHJMs) was developed by Tingting Yu. Here, the models used in the package are extended to accepting alternative survival models, i.e. distributional assumptions. 
 
-## Introduction to the modified package ([HHJMs.c](HHJMs-l.tar.gz))
+### Guide to use the package
 
-The orignal package [HHJMs](https://github.com/oliviayu/HHJMs) was developed by Tingting Yu. Here, the models used in the package are extended to accepting alternative survival models, i.e. distributional assumptions. The package is further modified in multiple ways to be more user-friendly; the modifications are listed in the issue-solution pairs below.
+Users can either clone the repo or solely downlown the package, and install the package locally. For Mac users,
+
+`install.packages("~/HHJMs-c.tar.gz", repos = NULL, type = "source")`
+
+If you are interesed in the original package, it can be easily downloaded from the Github repo [HHJMs](https://github.com/oliviayu/HHJMs). Some helpful code is:
+
+`library(devtools)
+install_github('oliviayu/HHJMs')`
+
+### Modification on the Original Package
+
+The package is further modified in multiple ways to be more user-friendly; the modifications are listed in the issue-solution pairs below.
 
 - Issue 1: Some dependencies are not successully loaded when installing the HHJMs package.
 - Solution: Re-document the package by importing the dependencies in NAMESPACE.
@@ -38,17 +53,10 @@ The orignal package [HHJMs](https://github.com/oliviayu/HHJMs) was developed by 
 - Solution: Add ellipses as the last arguments of functions. 
 
 
-### Guide to use the package
+### Troubleshooting
 
-Users can either clone the repo or solely downlown the package, and install the package locally. For Mac users,
-
-`install.packages("~/HHJMs-c.tar.gz", repos = NULL, type = "source")`
-
-If you are interesed in the original package, it can be easily downloaded from the Github repo [HHJMs](https://github.com/oliviayu/HHJMs). Some helpful code is:
-
-`library(devtools)
-install_github('oliviayu/HHJMs')`
-
+Load the package in the end.
+`library(HHJMs.c)`
 
 
 ### Run experiments
