@@ -1,0 +1,66 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/data/home/mengwang/21-summer-project/src'
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=116]
+### [bt]: Generating problem instance for problem 'generate_data' ...
+### [bt]: Applying algorithm 'fit_JMest' on problem 'generate_data' for job 116 (seed = 21071140) ...
+[1] "get initial values for LME & GLM models --- done."
+[1] "get initial values for GLME model --- done."
+[1] "get initial values for survival models --- done."
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 1 ############### 
+fixed.par: 2.63 0.67 -0.17 1.07 0.06 -1.66 0.31 -2.74 -1.22 2.89 1.18 -0.05 -0.53 -0.33 -1.06 -58.94 8.86 
+FixedParDiff =  0.3191013 
+likDiff =  1 
+sigma: 0.95 0.09 -0.46 -0.29 2 
+loglike: -5983.848 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 2 ############### 
+fixed.par: 2.2 0.96 -0.3 1.36 0.06 -1.73 0.34 -2.78 -1.15 2.73 1.22 -0.05 -0.61 -0.59 -1.45 -70.71 10.64 
+FixedParDiff =  0.2178908 
+likDiff =  0.00760051 
+sigma: 0.97 0.1 -0.46 -0.29 2 
+loglike: -5938.368 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 3 ############### 
+fixed.par: 2.15 1 -0.31 1.39 0.06 -1.74 0.36 -2.77 -1.11 2.65 1.23 -0.05 -0.73 -1.01 -2.06 -87.25 13.15 
+FixedParDiff =  0.1259386 
+likDiff =  0.002644571 
+sigma: 0.98 0.1 -0.42 -0.28 2.01 
+loglike: -5922.663 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 4 ############### 
+fixed.par: 2.15 1 -0.32 1.39 0.06 -1.76 0.38 -2.76 -1.07 2.59 1.24 -0.05 -1.17 -2.03 -3.72 -139.9 21.13 
+FixedParDiff =  0.2249705 
+likDiff =  0.00430763 
+sigma: 0.98 0.08 -0.38 -0.31 2.01 
+loglike: -5897.151 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 5 ############### 
+fixed.par: 2.15 1 -0.31 1.39 0.06 -1.72 0.36 -2.75 -1 2.43 1.24 -0.05 -2.69 -4.91 -9.04 -317.89 48.15 
+FixedParDiff =  0.412456 
+likDiff =  0.009729308 
+sigma: 0.98 0.05 -0.31 -0.36 2 
+loglike: -5839.775 
+########################################## 
+[1] "estimate random effects --- done."
+Error in estFixeff(RespLog, fixed = Jfixed, str_val = fixedest0, Dpars = Jraneff,  : 
+  Iteration stops because fixed parameters can not be successfully estimated.
+
+### [bt]: Job terminated with an exception [batchtools job.id=116]
+### [bt]: Calculation finished!
