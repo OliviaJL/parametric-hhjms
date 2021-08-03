@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project extends the work on jointly modelling mixed and truncated longitudinal data and survival data by Tingting Yu, Dr. Lang Wu and Dr. Peter B. Gilbert [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) to a couple of alternative survival models, *Weibull Regression Model* and *Loglogistic Accelarated Failure Time Model*. The project is motivated by higher efficiency of the parametric survival models compared to nonparametric ones when the distributional assumptions hold. 
+This project extends the work on jointly modelling mixed and truncated longitudinal data and survival data by Dr. Tingting Yu, Dr. Lang Wu and Dr. Peter B. Gilbert [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) to a couple of alternative survival models, *Weibull Regression Model* and *Loglogistic Accelarated Failure Time Model*. The project is motivated by higher efficiency of the parametric survival models compared to nonparametric ones when the distributional assumptions hold. 
 
 ### Motivation Case - The HIV Vaccine Data
 
