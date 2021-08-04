@@ -1,5 +1,5 @@
 # ----------
-srcpath='/Users/olivialiu/Library/Mobile Documents/com~apple~CloudDocs/Downloads/parametric-hhjms-main-3/src/HHJMs_simul0721-2/results'
+srcpath='~/'
 setwd(srcpath)
 
 file_list = list.files()
@@ -19,8 +19,6 @@ for(i in file_name){
 jmsum2 = jmsum2/298
 
 # ------------
-srcpath2 = '/Users/olivialiu/Documents/UBC/21Sum_RA/simul_for_three_models/src/src-final/HHJMs_simul0721/results'
-setwd(srcpath2)
 
 file_list2 = list.files()
 file_name2 = parse_number(file_list2)
