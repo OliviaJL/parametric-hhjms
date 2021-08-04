@@ -29,5 +29,5 @@ library(doParallel)
 library(MASS)
 library(ecoreg)
 
-library(HHJMs)
+library(HHJMs.p)
 
