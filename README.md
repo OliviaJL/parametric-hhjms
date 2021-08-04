@@ -59,3 +59,6 @@ I'd like to thank Dr. Lang Wu for his generous help and precious advice.
 
 ## Some References
 
+[1] Yu T, Wu L, Gilbert PB. A joint model for mixed and truncated longitudinal data and survival data, with application to HIV vaccine studies. Biostatistics. 2018 Jul 1;19(3):374-90.
+
+[2] Lee Y, Nelder JA, Pawitan Y. Generalized linear models with random effects: unified analysis via H-likelihood. CRC Press; 2018 Jul 11.
