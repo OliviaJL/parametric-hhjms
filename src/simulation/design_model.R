@@ -1,7 +1,7 @@
-algo_designs <- list( # both tf_versions, all other params the same
+algo_designs <- list(
   fit_JMest = data.table(
-    distribution = c('weibull', 'No_distribution'), #,'loglogistic'), #,'weibull', 'loglogistic'),
-    method = 'h-likelihood', #c('h-likelihood', 'h-likelihood', 'h-likelihood', 'aGH', 'aGH'),
+    distribution = c('weibull', 'No_distribution'), 
+    method = 'h-likelihood', 
     itertol = 1e-3,
     iterMax = 20L
   )
@@ -19,7 +19,7 @@ pre_estimator <- function(data, job, instance, distribution, ...){
   ## Model 1: a LME model of Y
   fm1 = y ~ 1 + year + year2 + sindoes + (1|sid)
   md1 <- lmer(fm1, data = long_data)
-  estBi = data.frame(row.names(ranef(md1)$sid), scale(ranef(md1)$sid, center = T, scale = T)) # get the estimated random effect by observation
+  estBi = data.frame(row.names(ranef(md1)$sid), scale(ranef(md1)$sid, center = T, scale = T))
   names(estBi) = c("sid", "estb11")
   mydat = merge(long_data, estBi, by = 'sid', all = T)
   
