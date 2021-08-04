@@ -1,1 +1,1 @@
-This folder includes the R code for applying joint models on read data, measuring the performance in simulation and the modified R package [HHJMs.p](HHJMs-p.tar.gz).
+This folder includes the R code for applying joint models on read data in [*example*](example), measuring the performance in simulation in [*simulation*](simulation) and the modified R package [HHJMs.p](HHJMs-p.tar.gz).
