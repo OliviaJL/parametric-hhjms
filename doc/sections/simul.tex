@@ -1,0 +1,39 @@
+\section{Simulation}
+\label{sec:simul}
+
+The model performance is averaged on $300$ synthetic datasets with individuals $n=100$ of each. We design a similar model as in Sec \ref{sec:applc}. The true parameters are $\boldsymbol{\beta}=(2,1,-0.3,1.5)^T$, $\boldsymbol{\alpha}=(-1.65,0.15,1.8,-0.05,0.4)^T$, $\boldsymbol{\gamma}=(-0.75,-1.5,-2)^T$, the variances of errors in the linear mixed effects model of $Y$ is $\sigma=0.75$, and the covariance between two vectors of random effects as $0.3$ for all individuals. Choose $\text{LLOQ}=2$, let the secondary parameters $d_1=0.5$, $d_2=0.15$. In the Cox PH models, let the baseline hazards models to be $h_0=800$. The simulation of Cox and Weibull regression models are in Table \ref{tbl:siml}.
+\begin{table}[ht]
+\centering
+\caption{Simulation Study of Cox and Weibull Regression Models using h-Likelihood}
+\begin{tabular}{rr|rrr|rrr}
+  \hline
+   & & \multicolumn{3}{c|}{Cox} &  \multicolumn{3}{c}{Weibull} \\
+  \hline
+   & True para & Estimates & Std\_Errors & P-values & Estimates & Std\_Errors & P-values \\ 
+  \hline
+  $\beta_0$ & 2.000 & 2.144 & 0.096  & 0.000 & 2.153 & 0.096  & 0.000 \\ 
+  $\beta_1$ & 1.000 & 0.997 & 0.234 & 0.000 & 0.992 & 0.233 & 0.000 \\ 
+  $\beta_2$ & -0.300 & -0.311 & 0.159  & 0.050 & -0.309 & 0.158  & 0.051 \\ 
+  $\beta_3$ & 1.500 & 1.395 & 0.081  & 0.000 & 1.389 & 0.081  & 0.000 \\ 
+  %eta0 & 0.000 & 0.055 & 0.169 & 0.744 & 0.055 & 0.171 & 0.746 \\ 
+  %eta1 & 0.000 & -1.731 & 0.591  & 0.003 & -1.726 & 0.590  & 0.003 \\ 
+  %eta2 & 0.000 & 0.339 & 0.460 & 0.461 & 0.327 & 0.459  & 0.477 \\ 
+  %eta3 & 0.000 & -2.777 & 0.217 & 0.000 & -2.786 & 0.216 & 0.000 \\
+  \hline
+  $\alpha_0$ & -1.650 & -1.191 & 0.220  & 0.000 & -1.273 & 0.223  & 0.000 \\ 
+  $\alpha_1$ & 0.150 & \textcolor{red}{2.579} & 0.079  & 0.000 & \textcolor{red}{2.751} & 0.076  & 0.000 \\ 
+  $\alpha_2$ & 1.800 & 1.522 & 0.376 & 0.000 & 1.554 & 0.382 & 0.000 \\ 
+  $\alpha_3$ & -0.050 & -0.071 & 0.038  & \textcolor{red}{0.064} & -0.066 & 0.039  & \textcolor{red}{0.089} \\ 
+  \hline
+  $\gamma_0$ & -0.750 & -0.644 & 0.132  & 0.001 & -0.463 & 0.139  & 0.001 \\ 
+  $\gamma_1$ & -1.500 & \textcolor{red}{-0.614} & 0.134  & 0.015 & \textcolor{red}{-0.310} & 0.240  & \textcolor{red}{0.196} \\ 
+  $\gamma_2$ & -2.000 & \textcolor{red}{-1.561} & 0.162 & 0.004 & \textcolor{red}{-1.008} & 0.135  & 0.000 \\ 
+   \hline
+\end{tabular}
+\label{tbl:siml}
+\end{table}
+
+
+
+
+

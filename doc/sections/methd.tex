@@ -1,0 +1,259 @@
+\section{Methodology}
+\label{sec:method}
+
+We follow the notations used in \cite{yu2018joint}. Suppose $Y$ is a continuous longitudinal variable where $Y_{ij}$ represents the value of $i$th participant at $j$th time point, where there are n individuals, i.e., $i=1,\dots,n$ and $n_i$ time points for individual $i$, i.e., $j=1,\dots,n_i$. $Y$ is truncated by $Y\geq d$, where $d$ is the LLOQ, and denote $C$ as the corresponding truncation indicator, where $C=1$, if $Y\leq d$, and $C=0$, otherwise. Denote $Z$ as a discrete longitudinal variable, and $T_i^{\ast}$ as the observed survival data. The joint model proposed by Yu et al. \cite{yu2018joint} can be defined as follows.
+
+%\subsubsection{Separate Models for longitudinal data of mixed type and survival data}
+% check the dimension, check vectors and matrices are bold
+% check (),  {}, []
+
+%talk about the relationship between responses.
+
+\subsection{The Semi-parametric Joint Model}
+\label{sec:2.1}
+
+\vspace{2mm}
+\noindent \textbf{\textit{Mixed Effects Models for Longitudinal Data}}
+\vspace{2mm}
+
+$Y$ is continuous, and left-truncated due to LLOQ
+capture the information of $Y$ in separate models:
+
+\begin{equation}
+    Y_{ij}|Y_{ij}\geq d = g({\Psi}_{ij}, {\Phi}_{ij}, \boldsymbol{\beta}, \boldsymbol{b}_{1i}) + \epsilon_{ij},
+\end{equation}
+where $g(\cdot)$ is known linear or nonlinear function, ${\Psi}_{ij}\in \mathbb{R}^{p_1}$ and ${\Phi}_{ij}\in \mathbb{R}^{q_1}$ are vectors of covariates for participant $i$ at time $t_{ij}$, with $p_1$ time-independent variables and $q_1$ time-dependent variables respectively, $\boldsymbol{\beta}\in \mathbb{R}^{p_1}$ contains $p_1$ fixed parameters, $\boldsymbol{b}_{1i}\in \mathbb{R}^{q_1}$ contains $q_1$ random effects for participant $i$, with $i=1,...,n$, $j=1,...,n_i$. When $g({\Psi}_{ij}, {\Phi}_{ij}, \boldsymbol{\beta}, \boldsymbol{b}_{1i}) = {\Psi}_{ij}^T \boldsymbol{\beta} + {\Phi}_{ij}^T \boldsymbol{b}_{1i}$, it is a linear mixed effects model. The random effects for participant $i$ are independent and identically distributed as a multivariate normal distribution where $\boldsymbol{b}_{1i}\stackrel{iid}{\sim} N(\boldsymbol{0}, \boldsymbol{D}_1)$, and errors $\boldsymbol{\epsilon}_i\in \mathbb{R}^{n_i}$ follows $\boldsymbol{\epsilon}_{i}\stackrel{iid}{\sim} N(\boldsymbol{0}, {R}_i)$, ${R}_i=\sigma^2 {I}_i$.
+
+%\vspace{2mm}
+%\noindent \textit{Generalized Mixed Effects Model for Discrete Longitudinal Data}
+%\vspace{2mm}
+
+$Z$ is discrete and modeled by a generalized linear mixed effects model:
+\begin{equation}
+    q(\mathbb{E}(Z_{ik})) = \boldsymbol{x}_{ik}^T \boldsymbol{\alpha} + \boldsymbol{\mu}_{ik}^T \boldsymbol{b}_{2i},
+\end{equation}
+where $\mathbb{E}(Z_{ik})$ represents the expectation of variable $Z_{ik}$ for participant $i$ at time $t_{ik}$, $q(\cdot)$ is a known link function, $\boldsymbol{x}_{ik}\in \mathbb{R}^{p_2}$ is a vector of $p_2$ time-independent variables, $ \boldsymbol{\mu}_{ik}\in \mathbb{R}^{q_2}$ is a vector of $q_2$ time-dependent variables for participant $i$ at time $t_{ik}$, $\boldsymbol{\alpha}\in \mathbb{R}^{p_2}$ contains $p_2$ fixed parameters, $\boldsymbol{\mu}_{ik}\in \mathbb{R}^{q_2}$ contains $q_2$ random effects for participant $i$, with $i=1,...,n$, time $k=1,...,m_i$.
+
+%\vspace{2mm}
+%\noindent \textit{Generalized Mixed Effects Model for Truncation Indicator}
+%\vspace{2mm}
+
+$Y_{ij}$ is left-truncated by LLOQ $d$, i.e., $Y_{ij}\geq d$. Define a truncation indicator %$C_{ij}$ that 
+%$$C_{ij} = \begin{cases}
+%1 & Y_{ij} < d \\
+%0 & Y_{ij} \geq d
+%\end{cases},$$
+$C_{ij} = I(Y_{ij}<d)$, and model it by
+\begin{equation}
+    \text{logit}(P(C_{ij} = 1)) = \boldsymbol{w}_{ij}^T \boldsymbol{\eta} + \boldsymbol{v}_{ij}^T \boldsymbol{b}_{3i},
+\end{equation}
+where $\boldsymbol{w}_{ij}\in \mathbb{R}^{p_3}$ is a vector of $p_3$ time-independent variables, $\boldsymbol{v}_{ij}\in \mathbb{R}^{q_3}$ is a vector of $q_3$ time-dependent variables for participant $i$ at time $t_{ij}$, $\boldsymbol{\eta}\in \mathbb{R}^{p_3}$ contains $p_3$ fixed parameters, $\boldsymbol{b}_{3i}\in \mathbb{R}^{q_3}$ contains $q_3$ random effects for participant $i$ and follows $\boldsymbol{b}_{3i}\stackrel{iid}{\sim} N(\boldsymbol{0}, \boldsymbol{D}_3)$, with $i=1,...,n$, $j=1,...,n_i$. 
+
+
+% relationship between longitudinal data/responses
+Let $q=q_1+q_2+q_3$, and then the random effects are $\boldsymbol{b}_i = (\boldsymbol{b}_{1i}^T, \boldsymbol{b}_{2i}^T, \boldsymbol{b}_{3i}^T)^T \in \mathbb{R}^{q}$ for participant $i$.
+
+
+
+\vspace{2mm}
+\noindent \textbf{\textit{Survival Models for Survival Data}}
+\vspace{2mm}
+
+Lei $T_i^{\ast}$ be the time to the event of HIV infection, $\mathcal{C}_i$ be the right-censoring time, and then the observed time is defined by $S_i = min\{ T_i^{\ast}, \mathcal{C}_i\}$, and the event indicator is $\delta_i = I(T_i^{\ast} \leq \mathcal{C}_i)$. Assume the censoring is non-informative, the observed survival data can be measured by $\{(s_i, \delta_i),i=1,\dots,n \}$.
+
+The Cox proportional hazards model builds the relationship between the hazards proportions and linear predictors. It can be defined by
+\begin{equation}
+    log\Big[\frac{h_i(t)}{h_0(t)}\Big] = \boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1,
+\end{equation}
+where $h_i(t)$ is a hazard function of the time to event, $h_0(t)$ is an unspecified baseline hazard function, $\boldsymbol{x}_{si}\in \mathbb{R}^{p_4}$ is a vector of $p_4$ time-independent covariates for participant $i$, $\boldsymbol{b}_i$ contains the random effects in mixed effects models for participant $i$, $\boldsymbol{\gamma}_0\in \mathbb{R}^{p_4}$ and $\boldsymbol{\gamma}_1\in \mathbb{R}^{q_1+q_2+q_3}$ contains fixed effects.
+
+
+\vspace{2mm}
+\noindent \textbf{\textit{Statistical Inference of the Semi-parametric Modeling Framework}}
+\vspace{2mm}
+%\subsubsection{Likelihood of Joint Models}
+
+Let the fixed parameters be $\boldsymbol{\theta}_1 = (\boldsymbol{\beta}^T,\boldsymbol{\eta}^T,\boldsymbol{\alpha}^T, \boldsymbol{\gamma}_0^T,\boldsymbol{\gamma}_1^T)^T$, dispersion parameters be $\boldsymbol{\epsilon} = (\sigma, vec({\Sigma}))^T$, where $vec({\Sigma})$ represents the vectorized variance-covariance matrix of random effects. 
+The joint likelihood function of the joint model can be written as
+\begin{equation}
+    \begin{split}
+        L_h (\boldsymbol{\theta}_1,\boldsymbol{\epsilon}) = \prod_{i=1}^n \int\{ f(\boldsymbol{y}_{i}|\boldsymbol{c}_{i}=0,\boldsymbol{b}_{1i},\boldsymbol{\beta},\sigma) f(\boldsymbol{c}_{i}|\boldsymbol{b}_{3i},\boldsymbol{\eta}) f(\boldsymbol{z}_{i}|\boldsymbol{b}_{2i},\boldsymbol{\alpha}) f(s_i,\delta_i|h_0,\boldsymbol{\gamma_0},\boldsymbol{\gamma_1}) f(\boldsymbol{b}_i|\Sigma)\} d \boldsymbol{b}_i.
+    \end{split}
+\end{equation}
+
+
+
+\subsection{The Proposed Parametric Joint Model}
+
+The proposed framework replace the semi-parametric Cox proportional hazards model by parametric models, Weibull regression models and Log-logistic accelerated failure time models. 
+%Proportional hazards models build relationship between the hazard function and covariates, 
+The AFT models build the relationship between the log of time-to-event and covariates, which is more straightforward and easy to interpret compared to PH models. As the proportional hazards assumption is relatively strong in many cases, the AFT models have less restricted assumptions as well.
+%Accelerated failure time models were proposed by Collett in 2003 \cite{}. 
+A comprehensive discussion is provided in \cite{wang2006estimation}.
+
+\subsubsection*{\textit{Parametric Survival Models}}
+
+The Weibull regression models have two alternative representations, a proportional hazards (PH) form and an accelerated failure time (AFT) form. For a clear comparison between the parametric models, we use the AFT forms. 
+%Weibull model assumes the baseline hazard function is specified as a Weibull distribution, denoted as $W(\lambda_{\circ}, \gamma_{\circ})$, where $\lambda_{\circ}>0$ is the scale parameter, and $\gamma_{\circ}>0$ is the shape parameter. 
+The Weibull regression model or the log-logistic AFT model can then be defined as a log-linear model:
+\begin{equation}
+    log(T_i) = \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1 +\sigma_{\circ} \varepsilon_i,
+\end{equation}
+where $T_i$ is the survival time, $\sigma_{\circ}$ is a scale parameter, $\boldsymbol{x}_{si}\in \mathbb{R}^{p_4}$ is a vector of time-independent variables for individual $i$, $\boldsymbol{\alpha}_0$ and $\boldsymbol{\alpha}_1$ are fixed effects, and $\varepsilon_i$ is a random variable. The random variable $\varepsilon_i = \frac{log(T_i) - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ} }$ has a density $f_0(\varepsilon_i)$, and a corresponding survival $S_0(\varepsilon_i)$.
+%
+Following Lawless in 2003 \cite{lawless2011statistical}, the likelihood function for individual $i$ is given by
+\begin{equation}
+    \begin{split}
+        L_{si} (\boldsymbol{\alpha}_0,\boldsymbol{\alpha}_1,\sigma_{\circ}) &= \Big[ \frac{1}{\sigma_{\circ}} f_0(\varepsilon_i) \Big]^{\delta_i} S_0(\varepsilon_i)^{1-\delta_i}, \\
+        &=  \Big[ \frac{1}{\sigma_{\circ}} f_0 \big( \frac{log(T_i) - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ} } \big) \Big]^{\delta_i} 
+        S_0 \big( \frac{log(T_i) - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ} } \big)^{1-\delta_i},
+    \end{split}
+\end{equation}
+and the log-likelihood is 
+\begin{equation}
+    \begin{split}
+         \ell_{si} (\boldsymbol{\alpha}_0,\boldsymbol{\alpha}_1,\sigma_{\circ}) &= -\delta_i log(\sigma_{\circ}) + \delta_i log f_0(\varepsilon_i) + (1-\delta_i) S_0(\varepsilon_i) \\ 
+         &= -\delta_i log(\sigma_{\circ}) + \delta_i log f_0(\frac{log(T_i) - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ} }) + (1-\delta_i) S_0(\frac{log(T_i) - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ} }).
+    \end{split}
+    \label{eq:logSurv}
+\end{equation}
+%the hazards function is:
+%\begin{equation}
+%    \begin{split}
+%        h_i(t_i) &= \frac{1}{\sigma_{\circ}t_i} \Big\{1 + t_i^{-1/\sigma_{\circ}}exp(\frac{\mu + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \Big\}^{-1},
+%    \end{split}
+%\end{equation}
+The Weibull and Log-logistic AFT model assumes the survival data follows a Weibull and log-logistic distributions respectively, and thus the log of survival time follows extreme-value and logistic distributions respectively. The survival for Weibull AFT model is $S_0(\varepsilon)=exp(-e^{\varepsilon})$, and for log-logistic AFT model is $S_0(\varepsilon)=(1+e^{\varepsilon})^{-1}$, and $f_0(\varepsilon)$ is the corresponding density function.
+
+\subsubsection*{\textit{Joint Likelihood with Weibull Regression Model and Log-logistic AFT Models}}
+
+Let the fixed parameters be $\boldsymbol{\theta}_2 = (\boldsymbol{\beta}^T,\boldsymbol{\alpha}^T,\boldsymbol{\alpha}_0^T, \boldsymbol{\alpha}_1^T, \boldsymbol{\eta}^T, \sigma_{\circ})^T$, and the vector of dispersion parameters is $\boldsymbol{\epsilon}=(\sigma, vec({\Sigma}))^T$ as define above in Sec \ref{sec:2.1}. 
+The likelihood function of the joint model is
+\begin{equation}
+    \begin{split}
+        L_{h}(\boldsymbol{\theta}_2,\boldsymbol{\epsilon}) = \prod_{i=1}^n \int\{ f(\boldsymbol{y}_{i}|\boldsymbol{c}_{i}=0,\boldsymbol{b}_{1i},\boldsymbol{\beta},\sigma) f(\boldsymbol{c}_{i}|\boldsymbol{b}_{3i},\boldsymbol{\eta}) f(\boldsymbol{z}_{i}|\boldsymbol{b}_{2i},\boldsymbol{\alpha}) f(s_i,\delta_i|\boldsymbol{\alpha}_0,\boldsymbol{\alpha}_1,\sigma_{\circ}) f(\boldsymbol{b}_i|\Sigma)\} d \boldsymbol{b}_i,
+    \end{split}
+\end{equation}
+%$f(s_i,\delta_i) = f(s_i,\delta_i|h_0,\boldsymbol{\gamma_0},\boldsymbol{\gamma_1})$ for Cox PH models, $f(s_i,\delta_i) = f(s_i,\delta_i|\lambda_{\circ},\gamma_{\circ},\boldsymbol{\gamma_0},\boldsymbol{\gamma_1})$ for Weibull PH models, and $f(s_i,\delta_i) = $  for Log-logistic AFT models.
+
+%The log density of Weibull PH representation for participant $i$ is
+%\begin{equation}
+%    \begin{split}
+%        log(f_i(s_i,\delta_i | \boldsymbol{\gamma}_0, \boldsymbol{\gamma}_1, \lambda_{\circ}, \gamma_{\circ}))
+%        &= \delta_i log(h_i) + log(S_i)  \\
+%        &= \delta_i \big(log(\lambda_{\circ}) + log(\gamma_{\circ}) + (\gamma_{\circ}-1)log(t_i) + \boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1 \big) -exp(\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1) \lambda_{\circ}t_i^{\gamma_{\circ}}.
+%    \end{split}
+%    \label{eq:logl1}
+%\end{equation}
+
+%\subsubsection{Joint model with Log-logistic AFT model}
+%The log density of log-logistic AFT model for participant $i$ is
+%\begin{equation}
+ %   \begin{split}
+ %       log (f_i(s_i,\delta_i | \boldsymbol{\alpha}_0, \boldsymbol{\alpha}_1, \sigma_{\circ}))
+%        =& \delta_i \Big(-log(\sigma_{\circ}) - log(t_i) -  log\Big(1+t_i^{-1/\sigma_{\circ}}exp(\frac{\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \Big) \Big)\\
+%        &- log \big(1+t_i^{-1/\sigma_{\circ}}exp(- \frac{\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \big).
+%    \end{split}
+%    \label{eq:logl3}
+%\end{equation}
+
+
+%For linear mixed effects model, truncated, continuous variable $\boldsymbol{Y}_{i}|\boldsymbol{b}_{1i},\boldsymbol{c}_{i}=0$ has density function of truncated normal distribution as \cite{mehrotra2000maximum}
+%\begin{equation}
+%    \begin{split}
+%        f(\boldsymbol{y}_{i}|\boldsymbol{c}_{i}=0,\boldsymbol{b}_{1i},\boldsymbol{\beta},\sigma) &= \frac{1}{\sigma} \phi(\frac{\boldsymbol{y}_{i}-\boldsymbol{\mu}_{i}}{\sigma}) \big(1-\Phi(\frac{d-\boldsymbol{\mu}_{i}}{\sigma})\big)^{-1}, \\
+%        &= \frac{1}{\sqrt{2\pi}\sigma} e^{-(\boldsymbol{y}_{i}-\boldsymbol{\mu}_{i})^2/ 2\sigma^2} 
+%        [1-\frac{1}{1+e^{-1.702 (d-\boldsymbol{\mu}_{i})/ \sigma}}]^{-1}
+%    \end{split}
+%\end{equation}
+%where $\boldsymbol{\mu}_{i}=\mathbb{E}(\boldsymbol{y}_{i}|\boldsymbol{b}_{1i})$ is the expectation of truncated $\boldsymbol{Y}_{i}$, $\phi(\cdot)$ is the probability density function of standard normal, and $\Phi(\cdot)$ is the corresponding cumulative distribution function.
+
+%The truncated indicator $C_{ij}$:
+%\begin{equation}
+%    \begin{split}
+%         P(c_{ij}=0|\boldsymbol{b}_{3i},\boldsymbol{\eta}) 
+         %&= \frac{exp(\boldsymbol{w}_{ij}^T \boldsymbol{\eta} + \boldsymbol{v}_{ij}^T \boldsymbol{b}_{3i})}{1+exp(\boldsymbol{w}_{ij}^T \boldsymbol{\eta} + \boldsymbol{v}_{ij}^T \boldsymbol{b}_{3i})} \\
+%         &= [1+exp(\boldsymbol{w}_{ij}^T \boldsymbol{\eta} + \boldsymbol{v}_{ij}^T \boldsymbol{b}_{3i})]^{-1}.
+%    \end{split}
+%\end{equation}
+
+%Assume $Z_{ik}$ is binary and $q(\cdot)=logit(\cdot)$, and then the probability of $Z$ is given by
+%\begin{equation}
+%    \begin{split}
+%        P(z_{ij}=1|\boldsymbol{b}_{2i},\boldsymbol{\alpha}) 
+        %&= \frac{exp(\boldsymbol{x}_{ik}^T \boldsymbol{\alpha} + \boldsymbol{\mu}_{ik}^T \boldsymbol{b}_{2i})}{1+ exp(\boldsymbol{x}_{ik}^T \boldsymbol{\alpha} + \boldsymbol{\mu}_{ik}^T \boldsymbol{b}_{2i})} \\
+%        &= [1 + exp(\boldsymbol{x}_{ik}^T \boldsymbol{\alpha} + \boldsymbol{\mu}_{ik}^T \boldsymbol{b}_{2i})^{-1} ]^{-1}.
+%    \end{split}
+%\end{equation}
+
+
+%%
+%log-likelihood for 
+%\begin{equation}
+%    \begin{split}
+%        &( 
+        
+%        ( - 0.5*(y- (\beta_0*1 +\beta_1* year +\beta_2* year2 +\beta_3* sindoes +
+%        \beta_4* b11))^2/\sigma^2 - log(\sigma)-0.5*log(2* \pi) \\
+%        &-log(1- 1/(1+exp(
+%        -1.702* 
+%        ( 2 -( \beta_0*1 +\beta_1* year +\beta_2* year2 +\beta_3* sindoes +
+%        \beta_4* b11 ))
+%        /\sigma )) )) * (1- c ) \\
+        
+%        & + ( \eta_0*1 +\eta_1* year +\eta_2* year2 +\eta_3* sindoes +\eta_4* b11 )* c \\
+        
+%        & - log(1+exp( \eta_0*1 +\eta_1* year +\eta_2* year2 +\eta_3* sindoes +\eta_4* b11 )) 
+        
+        
+%        )\\
+        
+%        &+( z *( \alpha_0*1 +\alpha_1* month + \alpha_2* sindoes +\alpha_3* doesW +\alpha_4* b11 +\alpha_5* month * b21 )\\
+%        &- log(1+exp( \alpha_0*1 +\alpha_1* month +\alpha_2* sindoes +\alpha_3* doesW +\alpha_4* b11 +\alpha_5* month * b21 )) )
+%    \end{split}
+%\end{equation}
+
+%The random effects approximately follows a multivariate normal distribution as $\boldsymbol{b}_i = (\boldsymbol{b}_{1i}^T, \boldsymbol{b}_{2i}^T, \boldsymbol{b}_{3i}^T)^T \sim N(\boldsymbol{0},\boldsymbol{\Sigma})$ for participant $i$. The density function is
+%\begin{equation}
+%    \begin{split}
+%        f(\boldsymbol{b}_i) &= (2\pi)^{-q/2}  det(\boldsymbol{\Sigma})^{1/2} e^{-\boldsymbol{b}_i^T \boldsymbol{\Sigma}^{-1} \boldsymbol{b}_i / 2}
+%    \end{split}
+%\end{equation}
+
+
+%\begin{equation}
+%    \begin{split}
+%        log(f_i(s_i,\delta_i | \boldsymbol{\gamma}_0, \boldsymbol{\gamma}_1, \lambda_{\circ}, \gamma_{\circ})) &= \delta_i log(h_i) + log(S_i)  \\
+%        &= \delta_i \big(log(\lambda_{\circ}) + log(\gamma_{\circ}) + (\gamma_{\circ}-1)log(t_i) + \boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1 \big) -exp(\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1) \lambda_{\circ}t_i^{\gamma_{\circ}}.
+%    \end{split}
+%    \label{eq:logl1}
+%\end{equation}
+
+
+
+
+
+
+
+\subsection{Approximation for Joint Likelihood Inference}
+
+The common way to solve the joint likelihood is Monte Carlo EM algorithm; however, when the vector of parameters has a very high dimension, it converges to the approximate estimates very slowly, and can fail to converge in many cases. %suffer numerical issues and 
+A more feasible way is the numerical integration methods such as Gauss-Hermite quadrature method, but it can be computationally consuming in high dimensions.  
+An alternative is the h-likelihood method, which is a numerical integration method as well, but can be much more computationally efficient with reasonable accuracy \cite{ha2003joint,molas2013joint}. The h-likelihood method thus is used to approximate the joint likelihood. By using the h-likelihood method, the integration can be avoided by treating the random effects as parameters in the log-likelihood function. The log  h-likelihood function of individual $i$ can be written as the sum of logarithmic terms which contain the term of random effects:
+\begin{equation}
+\begin{split}
+    \ell_{hi} (\boldsymbol{\theta}_2, \boldsymbol{\epsilon}, \boldsymbol{b}_{i}) =&\ log (f(\boldsymbol{y}_{i}|\boldsymbol{c}_{i}=0,\boldsymbol{b}_{1i},\boldsymbol{\beta},\sigma) )
+    +\sum_{j=1}^{n_i} \Big[ (1-c_i) logP(c_{ij}=0|\boldsymbol{b}_{3i},\boldsymbol{\eta}) + c_i logP(c_{ij}=1|\boldsymbol{b}_{3i},\boldsymbol{\eta})\Big] +  \\
+    &\sum_{j=1}^{n_i} \Big[ (1-z_i)P(z_{ij}=0|\boldsymbol{b}_{2i},\boldsymbol{\alpha}) + z_iP(z_{ij}=1|\boldsymbol{b}_{2i},\boldsymbol{\alpha}) \Big] 
+    + log( f(\boldsymbol{b}_i))  + \ell_{si} (\boldsymbol{\alpha}_0,\boldsymbol{\alpha}_1,\sigma_{\circ}),
+    %log (f(s_i,\delta_i | \boldsymbol{\gamma}_0, \boldsymbol{\gamma}_1, \lambda_{\circ}, \gamma_{\circ}))),
+\end{split}
+\end{equation}
+where $\ell_{si} (\boldsymbol{\alpha}_0,\boldsymbol{\alpha}_1,\sigma_{\circ})$ is the log-likelihood of AFT models in Eq.(\ref{eq:logSurv}).
+
+
+The algorithm solves the likelihood function by updating the random effects, fixed effects and dispersion parameters sequentially in each iteration. The choice of initial values of parameters is important as the joint likelihood can be non-identifiable and the optimal estimates are not identical, and the model can hardly be strictly convex and it is easy to yield local optima and fail to converge to the global optimization.
+It is reasonable to find the initial values by modeling the multiple processes in separate models, and the estimates can then be used as a good start of joint inference.
+
+%%
+Standard deviations are calculated using the Gauss-Hermite method as the h-likelihood is likely to underestimate the standard errors.

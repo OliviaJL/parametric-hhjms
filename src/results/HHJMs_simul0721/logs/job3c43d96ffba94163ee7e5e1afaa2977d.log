@@ -1,0 +1,55 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/Users/olivialiu/Documents/UBC/21Sum_RA/simul_for_three_models/src/src-final'
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=33]
+### [bt]: Generating problem instance for problem 'generate_data' ...
+### [bt]: Applying algorithm 'fit_JMest' on problem 'generate_data' for job 33 (seed = 21071057) ...
+[1] "get initial values for LME & GLM models --- done."
+[1] "get initial values for GLME model --- done."
+[1] "get initial values for survival models --- done."
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 1 ############### 
+fixed.par: 2.63 0.67 -0.17 1.07 0.06 -1.69 0.33 -2.73 -1.28 2.81 1.52 -0.06 -0.48 -0.19 -0.95 -54.13 8.13 
+FixedParDiff =  0.2682199 
+likDiff =  1 
+sigma: 0.95 0.09 -0.49 -0.05 1.95 
+loglike: -5987.071 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 2 ############### 
+fixed.par: 2.2 0.96 -0.3 1.36 0.06 -1.71 0.32 -2.78 -1.23 2.68 1.54 -0.06 -0.54 -0.3 -1.15 -62.2 9.35 
+FixedParDiff =  0.1917084 
+likDiff =  0.00656132 
+sigma: 0.97 0.1 -0.5 0.05 1.96 
+loglike: -5947.788 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 3 ############### 
+fixed.par: 2.15 0.99 -0.31 1.39 0.06 -1.74 0.34 -2.78 -1.21 2.61 1.54 -0.07 -0.6 -0.45 -1.35 -69.93 10.52 
+FixedParDiff =  0.08007639 
+likDiff =  0.001070283 
+sigma: 0.98 0.11 -0.49 0.14 1.98 
+loglike: -5941.422 
+########################################## 
+[1] "estimate random effects --- done."
+[1] "estimate fixed parameters --- done."
+[1] "estimate dispersion parameters --- done."
+############## Iteration: 4 ############### 
+fixed.par: 2.14 1 -0.31 1.4 0.06 -1.75 0.35 -2.78 -1.19 2.57 1.52 -0.07 -0.65 -0.62 -1.57 -77.61 11.69 
+FixedParDiff =  0.0582472 
+likDiff =  0.0009095546 
+sigma: 0.98 0.1 -0.48 0.21 1.99 
+loglike: -5936.018 
+########################################## 
+Successful convergence. Iteration stops because likDiff <= itertol.
+Warning in sqrt(diag(solve(Hmat))) : NaNs produced
+
+### [bt]: Job terminated successfully [batchtools job.id=33]
+### [bt]: Calculation finished!

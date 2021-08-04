@@ -1,0 +1,170 @@
+\section{Details of Calculating the Likelihood Functions}
+\label{sec:appenA}
+%check the function of x, what x exactly is.
+
+
+
+%\subsection{Survivial models}
+
+\subsubsection*{Weibull PH model}
+
+
+The hazard function for the Weibull regression can be represented by an alternative set of parameters:
+\begin{equation}
+    \begin{split}
+        h_i(t) &= \lambda_{\circ}\gamma_{\circ}t^{\gamma_{\circ}-1} e^{\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1} \\
+        &= \lambda_{\circ}e^{\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1}  \gamma_{\circ}t^{\gamma_{\circ}-1},
+    \end{split}
+\end{equation}
+which follows a Weibull distribution with a new scale parameter $ W(\lambda_{\circ}e^{\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1}, \gamma_{\circ})$, and the two sets of parameters have a relationship of $\boldsymbol{\gamma}_0 = - \boldsymbol{\alpha}_0 / \sigma_{\circ}$, $\boldsymbol{\gamma}_1 = - \boldsymbol{\alpha}_1/ \sigma_{\circ}$, $\gamma_{\circ} = \sigma_{\circ}^{-1}$, $\lambda_{\circ} = exp(-\mu_{\circ} / \sigma_{\circ})$.
+%See Appendix \ref{sec:appenA} for its alternative representation.
+
+
+The hazard of $W(\lambda_{\circ},\gamma_{\circ})$ is
+\begin{equation}
+    h_0(t) = \lambda_{\circ} \gamma_{\circ} (t_i)^{\gamma_{\circ}-1}.
+\end{equation}
+The hazard of $W(\lambda_{\circ}e^{\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1},\gamma_{\circ})$ is
+\begin{equation}
+    h_i(t) = \lambda_{\circ} e^{\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1} \gamma_{\circ} (t_i)^{\gamma_{\circ}-1},
+\end{equation}
+and taking a logarithm yields
+\begin{equation}
+    \begin{split}
+        log(h_i)) = log(\lambda_{\circ}) + log(\gamma_{\circ}) + (\gamma_{\circ}-1)log(t_i) + \boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1.
+    \end{split}
+\end{equation}
+The corresponding survival function is 
+\begin{equation}
+    \begin{split}
+        S_i(t_i) &= exp\big\{-exp(\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1) \lambda_{\circ}t_i^{\gamma_{\circ}} \big\},
+    \end{split}
+\end{equation}
+and taking a logarithm yields
+\begin{equation}
+    \begin{split}
+        log(S_i) = -exp(\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1) \lambda_{\circ}t_i^{\gamma_{\circ}}.
+    \end{split}
+\end{equation}
+The likelihood function of PH models is given by $L(\boldsymbol{\gamma}_0, \boldsymbol{\gamma}_1, \lambda_{\circ}, \gamma_{\circ})=\prod_{i=1}^n [h_i(t_i)]^{\delta_i}S_i(t_i)$, and the log-likelihood function for participant $i$ is
+\begin{equation}
+    \begin{split}
+        l_i(\boldsymbol{\gamma}_0, \boldsymbol{\gamma}_1, \lambda_{\circ}, \gamma_{\circ}) &= \delta_i log(h_i) + log(S_i)  \\
+        &= \delta_i \big(log(\lambda_{\circ}) + log(\gamma_{\circ}) + (\gamma_{\circ}-1)log(t_i) + \boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1 \big) -exp(\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1) \lambda_{\circ}t_i^{\gamma_{\circ}}.
+    \end{split}
+    \label{eq:logl1}
+\end{equation}
+
+
+
+\subsubsection*{Weibull AFT model}
+
+Define new vectors of parameters as $\boldsymbol{\gamma}_0 = - \boldsymbol{\alpha}_0 / \sigma_{\circ}$, $\boldsymbol{\gamma}_1 = - \boldsymbol{\alpha}_1/ \sigma_{\circ}$, $\gamma_{\circ} = \sigma_{\circ}^{-1}$, $\lambda_{\circ} = exp(-\mu_{\circ} / \sigma_{\circ})$.
+%$\boldsymbol{\alpha}_0 = - \boldsymbol{\gamma}_0\sigma_{\circ} $, $\boldsymbol{\alpha}_1 = - \boldsymbol{\gamma}_1 \sigma_{\circ}$, $\sigma_{\circ} = \gamma_{\circ}^{-1}$, $\mu_{\circ} = -\sigma_{\circ}ln(\lambda_{\circ})$.
+Define the acceleration factor as $\eta(\boldsymbol{x}_{si},\boldsymbol{b}_i) = e^{\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1} $, denoted as $\eta_i$. The hazard of the time to event is
+\begin{equation}
+    \begin{split}
+        h_i(t_i) &= \lambda_{\circ} e^{\boldsymbol{x}_{si}^T \boldsymbol{\gamma}_0 + \boldsymbol{b}_i^T  \boldsymbol{\gamma}_1}  \gamma_{\circ} t_i^{\gamma_{\circ}-1} \\
+        &= \eta_i^{-\gamma_{\circ}} \lambda_{\circ}\gamma_{\circ}  t_i^{\gamma_{\circ}-1}\\
+        &= \eta_i^{-1/\sigma_{\circ}} e^{-\mu_{\circ} / \sigma_{\circ}} (1/\sigma_{\circ}) t_i^{1/\sigma_{\circ} - 1} \\
+        &= (1/\sigma_{\circ}) t_i^{1/\sigma_{\circ} - 1}  exp(\frac{-\mu_{\circ} -\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}})
+    \end{split}
+\end{equation}
+which follows the Weibull distribution $W(exp(\frac{-\mu_{\circ} -\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}), 1/\sigma_{\circ})$ and taking a logarithm gives
+\begin{equation}
+    \begin{split}
+        log(h_i) &= -log(\sigma_{\circ}) + (1/\sigma_{\circ}-1)log(t_i)- \frac{\mu_{\circ}+\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}.
+    \end{split}
+\end{equation}
+The corresponding survival model is 
+\begin{equation}
+    \begin{split}
+        S_i(t_i) &= exp \Bigg[-exp \Big(\frac{-\mu_{\circ} - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ}} \Big)  t_i^{1/\sigma_{\circ}} \Bigg],
+    \end{split}
+\end{equation}
+and taking a logarithm gives
+\begin{equation}
+    \begin{split}
+        log(S_i) &= -exp \Big(\frac{-\mu_{\circ} - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ}} \Big)  t_i^{1/\sigma_{\circ}}.
+    \end{split}
+\end{equation}
+The log-likelihood function of participant $i$ is
+\begin{equation}
+    \begin{split}
+        l_i(\boldsymbol{\alpha}_0, \boldsymbol{\alpha}_1, \mu_{\circ}, \sigma_{\circ}) &= \delta_i \Big(-log(\sigma_{\circ}) + (1/\sigma_{\circ}-1)log(t_i)- \frac{\mu_{\circ}+\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}} \Big) - exp \Big(\frac{-\mu_{\circ} - \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 - \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ}} \Big)  t_i^{1/\sigma_{\circ}},
+    \end{split}
+    \label{eq:logl2}
+\end{equation}
+which is equivalent to Eq.\ref{eq:logl1}.
+
+%The density function of the time of event is 
+%\begin{equation}
+%    f_i(t) = \eta_i^{-1/\sigma_{\circ}} e^{-\mu_{\circ} / \sigma_{\circ}} \sigma_{\circ}^{-1} (\eta_i^{-1/\sigma_{\circ}} e^{-\mu_{\circ} / \sigma_{\circ}} t_i)^{1/\sigma_{\circ}-1} e^{(-\eta_i^{-1/\sigma_{\circ}} e^{-\mu_{\circ} / \sigma_{\circ}} t_i)^{1/\sigma_{\circ}}},
+%\end{equation}
+%and taking a log yields
+%\begin{equation}
+%    \begin{split}
+%        log(f_i(t)) &= -\frac{\boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T  \boldsymbol{\alpha}_1}{\sigma_{\circ}}  -\frac{\mu_{\circ}}{\sigma_{\circ}} - log(\sigma_{\circ}) -(1/\sigma_{\circ} - 1)log(\eta_i^{-1/\sigma_{\circ}} e^{-\mu_{\circ} / \sigma_{\circ}} t_i) 
+%        +(-\eta_i^{-1/\sigma_{\circ}} e^{-\mu_{\circ} / \sigma_{\circ}} t_i)^{1/\sigma_{\circ}} \\
+%        &= \frac{\mu_{\circ} + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}^2} - log(\sigma_{\circ})  - (1/\sigma_{\circ} -1)log(t_i) + \\
+%        &(- exp(- \frac{\mu_{\circ} + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) -(1/\sigma_{\circ}-1)t_i - log(\sigma_{\circ})t_i)^{1/\sigma_{\circ}}
+%    \end{split}
+%\end{equation}
+
+
+\subsubsection*{Log-logistic AFT model}
+
+Assume the time of event follows a log-logistic distribution. The hazard function is given by
+\begin{equation}
+    \begin{split}
+        h_i(t_i) &= \frac{1}{\sigma_{\circ}t_i} \Big\{1 + t_i^{-1/\sigma_{\circ}}exp(\frac{\mu + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \Big\}^{-1},
+    \end{split}
+\end{equation} and taking a logarithm gives
+\begin{equation}
+    \begin{split}
+        log(h_i) &= -log(\sigma_{\circ}) - log(t_i) -  log\Big(1+t_i^{-1/\sigma_{\circ}}exp(\frac{\mu + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \Big).
+    \end{split}
+\end{equation}
+The corresponding survival model is 
+\begin{equation}
+    \begin{split}
+        S_i(t_i) &= \Big[1+t_i^{-1/\sigma_{\circ}}exp(- \frac{\mu + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \Big]^{-1},
+    \end{split}
+\end{equation}
+and taking a logarithm gives
+\begin{equation}
+    \begin{split}
+        log(S_i) = -log(1+t_i^{-1/\sigma_{\circ}}exp(- \frac{\mu + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}})).
+    \end{split}
+\end{equation}
+The log-likelihood function of participant $i$ is
+\begin{equation}
+    \begin{split}
+        l_i(\boldsymbol{\alpha}_0, \boldsymbol{\alpha}_1, \mu_{\circ}, \sigma_{\circ}) =& \delta_i \Big(-log(\sigma_{\circ}) - log(t_i) -  log\Big(1+t_i^{-1/\sigma_{\circ}}exp(\frac{\mu + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \Big) \Big)\\
+        &- log \big(1+t_i^{-1/\sigma_{\circ}}exp(- \frac{\mu + \boldsymbol{x}_{si}^T \boldsymbol{\alpha}_0 + \boldsymbol{b}_i^T \boldsymbol{\alpha}_1}{\sigma_{\circ}}) \big).
+    \end{split}
+    \label{eq:logl3}
+\end{equation}
+%logf <- paste('-(log(',resp, ')-LLmu-',linear_pred,')/LLsigma-2*log(1+exp(-(log(',resp,')-LLmu-',linear_pred,')/LLsigma))')
+%    #logS <- paste('-log(1+exp((log(',resp, ')-LLmu-',linear_pred,')/LLsigma))')
+%    #loglike <- paste('-',status,'*(log(LLsigma*',resp,'+',status,'*(', logf, ')+(1-', status,')*(', logS, ')))')
+%\begin{equation}
+%    \begin{split}
+%        -\frac{(log(t_i) - \mu - linear_pred)}{\sigma} - 2log(1+exp(-\frac{
+%        log(t_i)-linear_pred}{\sigma}))
+%    \end{split}
+%\end{equation}
+
+An alternative representation is 
+\begin{equation}
+    \begin{split}
+        h_i(t_i) &= \frac{e^{\theta - k log\eta_i}  kt^{k-1}}{1+e^{\theta - k log\eta_i}t^k},
+    \end{split}
+\end{equation}
+and the survival model is
+\begin{equation}
+    \begin{split}
+        S_i(t_i) &= \frac{1}{1+e^{\theta - k log\eta_i}t^k},
+    \end{split}
+\end{equation}
+where $\theta_{\circ} = -\mu_{\circ}/\sigma_{\circ}$, $k_{\circ} = \sigma_{\circ}^{-1}$.
