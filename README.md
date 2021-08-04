@@ -1,4 +1,4 @@
-# Introduction on the Project - An Extension of [HHJMs](https://github.com/oliviayu/HHJMs) to some parametric survival models
+# An Extension of [HHJMs](https://github.com/oliviayu/HHJMs) to some parametric survival models
 
 ## Project Overview
 
