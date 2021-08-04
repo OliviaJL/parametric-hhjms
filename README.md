@@ -19,7 +19,7 @@ This work extends the original work by replacing the nonparametric survival mode
 The folder [*src*](src) contains the modified R package HHJMs.p based on HHJMs developed by Yu, R code for applying the joint models on real data in [*dat*](dat) and also in the R packages. The folder *doc* includes the .tex files of the report.
 
 
-## The Modified Package - [HHJMs.p](HHJMs-p.tar.gz)
+## The Modified Package - [HHJMs.p](src/HHJMs-p.tar.gz)
 
 The orignal package [HHJMs](https://github.com/oliviayu/HHJMs) was developed by Yu, Tingting. Here the models used in the package are extended to accepting alternative survival models, i.e., distributional assumptions. 
 
