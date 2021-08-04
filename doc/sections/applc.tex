@@ -1,0 +1,94 @@
+\section{Data Application}
+\label{sec:applc}
+
+\subsection{Data Description and Model Specification}
+
+We apply the joint models on the dataset \textit{VAX004} provided in the R package \texttt{HHJMs}. For joint models using Cox or Weibull PH models, we use the R package \texttt{HHJMs} developed by Yu in 2018. The package is slightly modified for the parametric extension using the Log-logistic AFT models, and provided in the modified package \texttt{HHJMs.p}.
+The dataset contains the longitudinal immunization biomarkers and the time-to-infection data of subjects who get HIV vaccines periodically during $36$ months. The study contains $n=194$ subjects in total. \textit{NAb} represents the titer of neutralizing antibodies of the HIV protein and \textit{MNGNE8} represents the averaged level of binding antibodies. They are the two major longitudinal processes in the data. Let $Y$ denote the original \textit{NAb} which is continuous, and let $Y_{ij}$ denote the original value of \textit{NAb} for individual $i$ at time $j$, $i=1,\dots,n$ and $j=1,\dots,n_i$. Let $Z$ denote the dichotomized \textit{MNGNE8} with $Z_{ij}=1$ representing samples greater than the sample median, and $Z_{ij}=0$ representing the other. The continuous variable $Y$ is left-truncated by a lower limit of quantification (LLOQ) of $d=1.477$. Let $C$ denote the truncation indicator of $Y$, with $C_{ij}=1$ corresponding to the samples smaller than the LLOQ. Observed time to infection of HIV is also contained in the dataset. More details about the data can be found in \cite{yu2018joint}.
+
+The subjects visit the clinic for vaccine injection at $\text{month}=0,1,6,12,18,24,30,36$, and for measurement of immunization biomarkers at the same time points as injection visits and also after half a month of each injection visit. Denote the time points of the measurements as $t_{ij}$ for individual $i$ at time point $j$, the time from the most recent vaccine injection to the most current measurement time as $t_{d_{ij}}$, and the time between two consecutive vaccine injection as $\Delta_{ij}$. Rescale the measurement time $t_{ij}$ from month to year to be $t_{ij}^{\ast}=t_{ij}/12$, and rescale $t_{d_{ij}}$ to be weeks by $t_{d_{ij}}^{\ast}=t_{d_{ij}}*30/7$ by roughly assuming there are 30 days per month.
+The covariates are transformed following the study \cite{yu2018joint}. As subjects get vaccine injection periodically, there is a periodic trend in the longitudinal data. A $sin(\cdot)$ transformation is made on the measurement time to capture the periodic trend in data. 
+
+The three major variables are highly correlated, so the joint model is needed to capture the correlation among them. As they are of almost equal importance, separate models are needed to measure the relationship between them and other covariates, rather than measure them in one model with one variable as the response and the others as covariates. Therefore, the HHJMs and proposed parametric joint models are suitable to model the data of interest.
+Following the design in \cite{yu2018joint}, define the separate longitudinal models as below. 
+\begin{equation}
+    \begin{split}
+        Y_{ij}|(C_{ij} = 0) &=  \beta_0 + \beta_1 t_{ij}^{\ast} + \beta_2  t_{ij}^{\ast}^2 + \beta_3 sin(\frac{\pi t_{d_{ij}}}{\Delta_{ij}}) + d_1 b_{1i} + \epsilon_{ij}, \\
+                logit(P(C_{ij} = 1)) &=  \eta_0 + \eta_1 t_{ij}^{\ast} + \eta_2  t_{ij}^{\ast}^2 + \eta_3 sin(\frac{\pi t_{d_{ij}}}{\Delta_{ij}}) + \eta_4 b_{1i},  \\
+               logit(P(Z_{ij} = 1)) &= \alpha_0 + \alpha_1 t_{ij} + \alpha_2 sin(\frac{\pi t_{d_{ij}}}{\Delta_{ij}}) + \alpha_3 t_{d_{ij}}^{\ast} + \alpha_4 b_{1i} + d_2 b_{2i} t_{ij},
+    \end{split}
+    \label{eq:y}
+\end{equation}
+The truncation indicator $C_{ij}$ is modeled in a generalized linear mixed effects models sharing the same linear predictor of model of $Y_{ij}$. Random effects are introduced into the intercepts.
+
+Three different survival models are considered. The Cox PH model is defined by
+\begin{equation}
+    \begin{split}
+        log\Big[ \frac{h_(T_i|x_i,\boldsymbol{b}_i)}{h_0(t)}\Big] = \gamma_0 x_i + \gamma_1 b_{1i} + \gamma_2 b_{2i}.
+    \end{split}
+\end{equation}
+The Weibull regression model or Log-logistic AFT model is
+\begin{equation}
+    log(T_i|x_i,\boldsymbol{b}_i) = a_0 x_i + a_1 b_{1i} + a_2 b_{2i}.
+\end{equation}
+
+
+\subsection{Approximate Results of the Joint Inference}
+
+The results of three models using h-likelihood approximation method are given in Table \ref{tbl:applc}.
+\begin{table}[ht]
+\centering
+\caption{Estimates of parameters in different joint models using h-likelihood method for \textit{VAX004}}
+\begin{tabular}{c|rrr|rrr|rrr}
+  \hline
+  \multirow{2}{*}{} &  \multicolumn{3}{c|}{Cox PH} &  \multicolumn{3}{c|}{Weibull PH}   &  \multicolumn{3}{c}{Log-logistic AFT} \\
+   \hline
+   & Estimate & Std.Error & Pvalue & Estimate & Std.Error & Pvalue & Estimate & Std.Error & Pvalue \\ 
+  \hline
+  \multicolumn{10}{c}{Fixed Effects} \\
+  \hline
+  $\beta_0$ & 2.079 & 0.062 & 0.00 & 2.079 & 0.063 & 0.00 & 2.012 & 0.040 & 0.00 \\ 
+  $\beta_1$ & 0.941 & 0.051 & 0.00 & 0.942 & 0.051 & 0.00 & 0.967 & 0.063 & 0.00 \\ 
+  $\beta_2$ & -0.287 & 0.022 & 0.00 & -0.287 & 0.022 & 0.00 & -0.292 & 0.027 & 0.00 \\ 
+  $\beta_3$ & 1.488 & 0.028 & 0.00 & 1.488 & 0.028 & 0.00 & 1.539 & 0.034 & 0.00 \\ 
+  \hline
+  $\eta_0$ & 0.201 & 0.282 & \textcolor{red}{0.48} & 0.198 & 0.287 & \textcolor{red}{0.49} & 0.198 & 0.199 & \textcolor{red}{0.32} \\ 
+  $\eta_1$ & -4.285 & 0.478 & 0.00 & -4.268 & 0.478 & 0.00 & -4.216 & 0.504 & 0.00 \\ 
+  $\eta_2$ & 1.354 & 0.228 & 0.00 & 1.346 & 0.228 & 0.00 & 1.315 & 0.241 & 0.00 \\ 
+  $\eta_3$ & -6.410 & 0.486 & 0.00 & -6.407 & 0.487 & 0.00 & -6.486 & 0.520 & 0.00 \\ 
+  \hline
+  $\alpha_0$ & -1.700 & 0.127 & 0.00 & -1.700 & 0.128 & 0.00 & -1.676 & 0.121 & 0.00 \\ 
+  $\alpha_1$ & 0.165 & 0.016 & 0.00 & 0.164 & 0.019 & 0.00 & 0.149 & 0.008 & 0.00 \\ 
+  $\alpha_2$ & 1.938 & 0.140 & 0.00 & 1.940 & 0.140 & 0.00 & 1.981 & 0.144 & 0.00 \\ 
+  $\alpha_3$ & -0.046 & 0.007 & 0.00 & -0.046 & 0.007 & 0.00 & -0.048 & 0.007 & 0.00 \\ 
+  \hline
+  $\gamma_0$ & -0.999 & 0.176 & 0.00 & -0.983 & 0.215 & 0.00 & - & - & - \\ 
+  $\gamma_1$ & -1.264 & 0.200 & 0.00 & -1.263 & 0.264 & 0.00 & - & - & - \\ 
+  $\gamma_2$ & 2.147 & 0.222 & 0.00 & 2.078 & 0.377 & 0.00 & - & - & - \\
+  $a_0$ & - & - & - & - & - & - & -2.875 & 0.281 & 0.00 \\ 
+  $a_1$ & - & - & - & - & - & - & -1.017 & - & - \\ 
+  $a_2$ & - & - & - & - & - & - & 1.232 & - & - \\ 
+   \hline
+   $log(\lambda_{\circ})$ & - & - & - & -103.816 & 13.743 & 0.000  & - & - & -\\
+   $\gamma_{\circ}$ & - & - & - & 15.602& 2.067 & 0.000  & -  & - & - \\
+   $\sigma_{\circ}$ &  - & - & -  & - & - & - & 0.563 & 0.008 & 0.000 \\
+   \hline
+   \multicolumn{10}{c}{Dispersion parameters} \\
+   \hline
+   $\sigma$ & 0.487 & - & - & 0.487 &- &-  & 0.563&- &-  \\
+   $r_{12}$ & 0.481 & - & - & 0.484 &- &-  & 0.583 &- &-  \\
+   \hline
+   \multicolumn{10}{c}{Other secondary parameters} \\
+   \hline
+   $\eta_4$ & -1.749 & - & - & -1.748 &- &-  & -1.730 &- &-  \\
+   $\beta_4$ & 0.448 & - & - & 0.448 &- &-  & 0.460 &- &-  \\
+   $\alpha_4$ & 0.398 & - & - & 0.395  &- &-  & 0.285  &- &-  \\
+   $\alpha_5$ & 0.162 & - & - & 0.161 &- &-  & 0.169 &- &-  \\
+    \hline
+\end{tabular}
+\label{tbl:applc}
+\end{table}
+
+
+
+The real data application of the three joint models yield similar results with respect to the estimates of fixed effects, standard error and the corresponding significance of parameters. All the time-dependent covariates are significant, so that it is reasonable to include these covariates. The estimates of dispersion and other secondary parameters using Cox and Weibull are similar, but are different to the estimates by log-logistic AFT models. It is reasonable that Cox and Weibull are both solved in PH form, and the only difference is whether the baseline hazards function is specified as a baseline Weibull distribution or not.

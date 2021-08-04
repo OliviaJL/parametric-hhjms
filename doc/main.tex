@@ -1,0 +1,33 @@
+\documentclass[10pt]{article}
+\input{header}
+
+\title{An Extension of a Joint Model for Longitudinal Data of Mixed Types and Survival Data:\\
+\textit{from Semi-parametric to Parametric Framework}
+}
+\author{Jiaping(Olivia) Liu}
+
+\addbibresource{hhjms.bib} 
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    This report provides an extension of the joint model for mixed and truncated longitudinal data and survival data proposed by Yu et al. in 2018 \cite{yu2018joint} by replacing the semi-parametric survival model by a couple of parametric survival models. They have similar performance on the real dataset. In the simulation study, proportional hazards models yield similar results, and performs poorly in the estimation of same parameters. The issue might be due to the invalid assumption of proportional hazards.
+    
+    \noindent KEYWORDS: Weibull regression model, Accelerated failure time model, h-Likelihood, parametric model, computational efficiency
+\end{abstract}
+
+\input{sections/intro}
+\input{sections/methd}
+\input{sections/applc}
+\input{sections/simul}
+\input{sections/discs}
+
+\section*{Acknowledgement}
+
+The modified R pacakge \texttt{HHJMs.p} and relative R code are provided \href{https://github.com/OliviaJL/parametric-hhjms/blob/main/README.md}{here}. I'd like to thank Dr. Lang Wu for his generous help and precious advice.
+
+\printbibliography
+
+\end{document}
