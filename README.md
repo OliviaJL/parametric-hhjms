@@ -16,7 +16,7 @@ This work extends the original work by replacing the nonparametric survival mode
 
 ## Documents in the Github Repository
 
-The folder [*src*](src) contains the modified R package HHJMs.p based on HHJMs developed by Yu, R code for applying the joint models on real data in [*dat*](dat) and also in the R packages. The folder [*doc*](doc) includes the .tex files of the report.
+The folder [*src*](src) contains the modified R package HHJMs.p based on HHJMs developed by Yu, R code for applying the joint models on real data in [*dat*](dat) and also in the R packages. The folder [*doc*](doc) includes the .tex files of the report. References of the report are included in [*ref*](ref).
 
 
 ## The Modified Package - [HHJMs.p](src/HHJMs-p.tar.gz)
