@@ -58,7 +58,7 @@ The package is further modified in multiple ways to be more user-friendly; the m
 ### Troubleshooting
 
 Load the package in the end.
-`library(HHJMs.c)`
+`library(HHJMs.p)`
 
 
 ### Run experiments
