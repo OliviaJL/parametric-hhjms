@@ -6,9 +6,8 @@ This project extends the work on jointly modelling mixed and truncated longitudi
 
 ### Motivation Case - The HIV Vaccine Data
 
-The original study by Yu et al [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) is motivated by the VAX004 trial.  The special type of response variables *NAb* is visualized as in Figure 1 below. Figure 1 is from the [paper](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) [1].
+The original study by Yu et al [1](https://academic.oup.com/biostatistics/article/19/3/374/4210131?login=true) is motivated by the VAX004 trial.  The special type of response variables *NAb* is visualized as in Figure 1 below. Figure 1 is from [1].
 <img width="1199" alt="Screen Shot 2021-08-04 at 4 44 44 AM" src="https://user-images.githubusercontent.com/70077322/128175220-ff0a1735-f15f-4f65-9542-9a0ec45f9755.png">
-
 
 ### Some Contributions
 
